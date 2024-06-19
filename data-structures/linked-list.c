@@ -91,11 +91,21 @@ list **remove_list(list **head, item_type x) {
 }
 
 list **reverse_list(list **head) {
-    // reverses a linked list
-    // recursive solution?
-    // reverse(a -> b -> c ..) = reverse(b -> c ..) -> a = ... -> c -> b -> a
+    list *prev = NULL;
+    list *current = *head;
 
-    list **p = &((*head)->next);
-    reverse_list(p);
-    // TODO
+    while (current != NULL) {
+        // store the next node
+        list *next = current->next; 
+        // reverse the link
+        current->next = prev;
+
+        // moves the pointers forward
+        prev = current;
+        current = next;
+    }
+    // update the head and return it 
+    *head = prev;
+    return head;
 }
+
